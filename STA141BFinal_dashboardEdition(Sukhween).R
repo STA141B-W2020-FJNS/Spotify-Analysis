@@ -4,9 +4,10 @@ library(shinyWidgets)
 library(dplyr)
 library(spotifyr)
 library(formattable)
+library(shinydashboard)
 
 time_calculator <- function(a){
-
+  
   #calculates a decimal value for the number of minutes to hours, minutes and seconds
   hours = floor(a/60)
   minutes = floor(a%%60)
@@ -132,85 +133,93 @@ format_album<- function(data){
   library(formattable)
   
   formatted_table <- formattable(data, 
-              align = c("l",rep("r", NCOL(data) - 1)),
-              #change specific names to the color black
-              list(
-                `ID` = formatter("span",
-                                 style = ~ style(color="black"),
-                                 font.weight = "bold"),
-                
-                `Album Name` = formatter("span",
-                                         style = ~ style(color="black"),
-                                         font.weight = "bold"),
-                
-                `Album Release Year` = formatter("span",
-                                                 style= ~style(color="black")),
-                
-                `Valence` = formatter("span",
-                                      style = ~ style(color="black"),
-                                      font.weight = "bold"),
-                
-                `Energy` = formatter("span",
-                                     style = ~ style(color="black"),
-                                     font.weight = "bold"),
-                #change valence and energy gradient tiles based on their levels
-                `Valence` = color_tile("olivedrab1", "olivedrab4"),
-                
-                `Energy` = color_tile("olivedrab1", "olivedrab4"),
-                #match the mood to a corresponding color
-                `Mood` = formatter("span", 
-                                   style= x~ifelse(x== "Happy", style(color = "green", font.weight = "bold"),
-                                                   ifelse(x=="Ambitious", style(color = "blue", font.weight = "bold"),
-                                                          ifelse(x=="Peaceful", style(color = "purple", font.weight = "bold"),
-                                                                 style(color = "gray", font.weight = "bold"))))
-                ),
-                #change track name to the color black 
-                `Total Tracks` = formatter("span",
-                                           style= ~style(color="black")),
-                #change dance level and release year to gradient tiles based on their levels
-                `Dance Level` = color_tile("olivedrab1", "olivedrab4"), 
-                
-                `Release Year` = color_tile("white", "tan")
-              )
+                                 align = c("l",rep("r", NCOL(data) - 1)),
+                                 #change specific names to the color black
+                                 list(
+                                   `ID` = formatter("span",
+                                                    style = ~ style(color="black"),
+                                                    font.weight = "bold"),
+                                   
+                                   `Album Name` = formatter("span",
+                                                            style = ~ style(color="black"),
+                                                            font.weight = "bold"),
+                                   
+                                   `Album Release Year` = formatter("span",
+                                                                    style= ~style(color="black")),
+                                   
+                                   `Valence` = formatter("span",
+                                                         style = ~ style(color="black"),
+                                                         font.weight = "bold"),
+                                   
+                                   `Energy` = formatter("span",
+                                                        style = ~ style(color="black"),
+                                                        font.weight = "bold"),
+                                   #change valence and energy gradient tiles based on their levels
+                                   `Valence` = color_tile("olivedrab1", "olivedrab4"),
+                                   
+                                   `Energy` = color_tile("olivedrab1", "olivedrab4"),
+                                   #match the mood to a corresponding color
+                                   `Mood` = formatter("span", 
+                                                      style= x~ifelse(x== "Happy", style(color = "green", font.weight = "bold"),
+                                                                      ifelse(x=="Ambitious", style(color = "blue", font.weight = "bold"),
+                                                                             ifelse(x=="Peaceful", style(color = "purple", font.weight = "bold"),
+                                                                                    style(color = "gray", font.weight = "bold"))))
+                                   ),
+                                   #change track name to the color black 
+                                   `Total Tracks` = formatter("span",
+                                                              style= ~style(color="black")),
+                                   #change dance level and release year to gradient tiles based on their levels
+                                   `Dance Level` = color_tile("olivedrab1", "olivedrab4"), 
+                                   
+                                   `Release Year` = color_tile("white", "tan")
+                                 )
   )
   
   return(formatted_table)
   
 }
 
-ui <- fluidPage(
-  
-  titlePanel("Artist Album Analysis"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      h5("This app generates an analysis of all the playlists of a specific artist."),
+ui <- dashboardPage(
+  dashboardHeader(
+    title="Spotify Analysis"
+  ),
+  dashboardSidebar(disable=TRUE),
+  dashboardBody(
+    fluidRow(
+      box(
+        title= "Artist Album Analysis Input",
+        width="3",
+        height ="360",
+        textInput(inputId="artist",
+                  label="Please type an artist name:"),
+        
+        #get sorting method of preference from the user
+        selectInput(inputId= "sort",
+                    label="Sort table by:",
+                    choices=c("Release Year", "Energy","Valence", "Dance Level"),
+                    selected= NULL),
+        
+        #get the arranging method of interest from the user
+        selectInput(inputId= "arrange",
+                    label="Arrange table by:",
+                    choices=c("Ascending", "Descending"),
+                    selected= NULL),
+        
+        #a submit button allows the user to submit the data from above
+        submitButton("Submit")
+      ),
+      box(title= "Artist Album Analysis",
+          height = "360",
+          width = "9",
+          solidHeader = T, 
+          column
+          (width = 12,
+          formattableOutput("albumTable"),
+          style = "height:300px; overflow-y: scroll;overflow-x: scroll;"
+            )
+          ),
       
-      #get the artist input from the user
-      textInput(inputId="artist",
-                label="Please type an artist name:"),
-      
-      #get sorting method of preference from the user
-      selectInput(inputId= "sort",
-                  label="Sort table by:",
-                  choices=c("Release Year", "Energy","Valence", "Dance Level"),
-                  selected= NULL),
-      
-      #get the arranging method of interest from the user
-      selectInput(inputId= "arrange",
-                  label="Arrange table by:",
-                  choices=c("Ascending", "Descending"),
-                  selected= NULL),
-      
-      #a submit button allows the user to submit the data from above
-      submitButton("Submit")
-    ),
-    
-    mainPanel(
-      #outputs the table 
-      formattableOutput("albumTable")
     )
-
   )
 )
 
@@ -229,7 +238,7 @@ server <- function(input, output) {
     
     #pass the data to the function that adds a mood and groups by album name
     album_one<-album_metrics(dataset)
-  
+    
     #pass the previous dataset to further change the table to include simpler names and time calcuations
     album_two<-album_metrics2(album_one)
     
