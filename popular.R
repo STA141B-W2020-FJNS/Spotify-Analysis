@@ -1,4 +1,5 @@
 library(shiny)
+library(shinydashboard)
 library(httr)
 library(jsonlite)
 library(tidyverse)
@@ -34,15 +35,26 @@ get_track_pop_cat <- function(cat) {
     return(tracks)
 }
 
-ui <- fluidPage(
-    titlePanel("Most Popular Spotify Tracks per Category"),
-    sidebarLayout(
-        sidebarPanel(
-            selectInput("cat", "Category", cats$name),
-            sliderInput("num", "Number of Tracks", min = 1, max = 30, value = 10)
-        ),
-        mainPanel(
-            tableOutput('mpts')
+ui <- dashboardPage(
+    dashboardHeader(title = "Spotify Analysis"),
+    dashboardSidebar(disable = TRUE),
+    dashboardBody(
+        fluidRow(
+            box(
+                selectInput("cat", "Category", cats$name),
+                sliderInput("num", "Number of Tracks", min = 1, max = 30, value = 10),
+                width = "3",
+                height = "360"
+            ),
+            box(column(width = 12,
+                       tableOutput("mpts"),
+                       style = "height:300px; overflow-y: scroll; overflow-x: scroll;"
+            ),
+            title = "Most Popular Spotify Tracks per Category",
+            height = "360",
+            width = "9",
+            solidHeader = TRUE
+            ),
         )
     )
 )
