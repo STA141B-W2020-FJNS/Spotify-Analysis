@@ -1,11 +1,4 @@
-#
-# This is the server logic of a Shiny web application. You can run the 
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
-#
+
 library(shiny)
 library(tidyverse)
 library(shinyWidgets)
@@ -164,7 +157,8 @@ format_album <- function(data) {
 }
 
 r_cat <- GET('https://api.spotify.com/v1/browse/categories',
-             add_headers(Authorization = paste("Bearer", get_spotify_access_token())),
+             add_headers(Authorization = paste("Bearer", get_spotify_access_token(client_id = Sys.getenv("SPOTIFY_CLIENT_ID"),
+                                                                                  client_secret = Sys.getenv("SPOTIFY_CLIENT_SECRET")))),
              query = list(country = 'US', locale = 'en_US', limit = 50))
 json_cat <- content(r_cat, as = 'text')
 from_json_cat <- fromJSON(json_cat)
