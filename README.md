@@ -13,7 +13,8 @@ The source of data comes from Spotify API. With the help of Spotifyr package on 
 The source of data comes from Spotify API. With the help of Spotifyr package on RStudio (https://cloud.r-project.org/web/packages/spotifyr/spotifyr.pdf ), we are able to retrieve desired data from Spotify and perform our analysis and data visualization on  audio features of tracks to learn about ist danceability energy, valence and more. We can even read more in-depth analysis data about tracks such as segments, beats, and tatums.   
 
 #### Data Retrieval and Process:  
-User’s analysis: Upon entering the user's credential, we will retrieve their top artist and top tracks and store them in a data table. We utilized ggplot and various coloring for a better data visualization.   
+
+"User’s analysis": Upon entering the user's credential, we will retrieve their top artist and top tracks and store them in a data table. We utilized ggplot and various coloring for a better data visualization.   
 
 "Most Popular Spotify Tracks per Category":  
 The app queries the list of Spotify categories for the United States to create a list of options in the “Category” dropdown menu. When a category is selected, a backend function produces a table of Spotify tracks and gets the IDs of every official playlist on Spotify. The top 100 tracks of each playlist is retrieved, and their IDs, names, artists, and popularity indices. Tracks with duplicate IDs are removed. The artists column is transformed to contain the names of each artist for each track. Then, the table is sorted by track popularity in descending order, and the ID and popularity columns are removed. Once the table is produced, the app fetches the top tracks in the table and displays them. The number of tracks displayed is the value of the “Number of Tracks” slider. If the slider is adjusted, the table is produced again, even if the selected category does not change.  
