@@ -1,6 +1,7 @@
 Spotify-Analysis
 =============
 ### STA 141B
+### Author: Fraklin Shih
 ------------------------------------------------
 
 #### Introduction:  
