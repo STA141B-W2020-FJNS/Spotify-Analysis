@@ -21,7 +21,8 @@ The app queries the list of Spotify categories for the United States to create a
 “Artist Album Analysis”: 
 The get_spotify_access_token() was used to create a Spotify access token and get_artist_audio_features() was used to get a data frame of tracks and other attributes from `spotifyr` from a string input of the artist name or the artist Spotify ID . The “formattable”  and “shinydashboard” library is then used to create an aesthetic table, grouped by album names. Many backend calculations were performed, please refer to the code for more detailed notes.  
 
-#### User Guide:    
+#### User Guide:
+# Note: Please refresh the app multiple times or wait a few minutes before the information is populated, due to the large amount of data takes time to process.
 User’s analysis: Users should be able to access the features of our app after clicking on the tab on the navigation bar on the left. If the app is not working correctly, please close it and re-open should resolve the issues.
 
 "Most Popular Spotify Tracks per Category: Designed to give a playlist of popular tracks. 
