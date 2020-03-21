@@ -18,7 +18,7 @@ The source of data comes from Spotify API. With the help of Spotifyr package on 
 The app queries the list of Spotify categories for the United States to create a list of options in the “Category” dropdown menu. When a category is selected, a backend function produces a table of Spotify tracks and gets the IDs of every official playlist on Spotify. The top 100 tracks of each playlist is retrieved, and their IDs, names, artists, and popularity indices. Tracks with duplicate IDs are removed. The artists column is transformed to contain the names of each artist for each track. Then, the table is sorted by track popularity in descending order, and the ID and popularity columns are removed. Once the table is produced, the app fetches the top tracks in the table and displays them. The number of tracks displayed is the value of the “Number of Tracks” slider. If the slider is adjusted, the table is produced again, even if the selected category does not change.  
 
 **Artist Album Analysis:** 
-The get_spotify_access_token() was used to create a Spotify access token and get_artist_audio_features() was used to get a data frame of tracks and other attributes from `spotifyr` from a string input of the artist name or the artist Spotify ID . The “formattable”  and “shinydashboard” library is then used to create an aesthetic table, grouped by album names. Many backend calculations were performed, please refer to the code for more detailed notes.  
+From the 'spotifyr' library, the get_spotify_access_token() was used to create a Spotify access token and get_artist_audio_features() was used to get a data frame of tracks and other attributes from a string input of the artist name or the artist Spotify ID . The “formattable”  and “shinydashboard” library is then used to create an aesthetic table, grouped by album names. Many backend calculations were performed, please refer to the code for more detailed notes.  
 
 ### User Guide:
 **Note: Please refresh the app multiple times or wait a few minutes before the information is populated, due to the large amount of data takes time to process.**
@@ -35,6 +35,7 @@ The get_spotify_access_token() was used to create a Spotify access token and get
 5)  It should be noted that anytime the category or number of tracks is updated, the resulting table will take anywhere from 5 to 15 seconds to load.
 
 **Artist Album Analysis:** Designed to give in depth analysis of your favorite artist’s albums.  
+Note: The default artist name has been set to "bts", but can be easily changed to an artist name of your choice
 1)  Under the title “Artist Album Analysis” the user will see three fields titled: “Please type an artist name”, “Sort table by”, and “Arrange table”. The user must first enter an artist name in the input box titled “Please type an artist name”.   
 2) Then, from the “Sort table by” drop down select which variable you want to sort your table by: “Release Year”, “Energy” , “Valence”, “Dance Level”. (for more information about Energy, Valence and Dance Level visit: https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/).   
 3) Proceed to the next input box titled “Arrange table by:”. This will allow you to arrange the selected value from the “Sort table by:”, select either “Ascending” or  “Descending” order.   
