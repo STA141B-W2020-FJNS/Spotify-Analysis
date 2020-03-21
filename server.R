@@ -206,7 +206,9 @@ shinyServer(function(input, output) {
     #format the above table into an aesthetic table
     format_album(album_final)
   })
+
   output$Top <- renderPlot({
+    
     scopes <- c("user-library-read", "streaming", "user-top-read", "user-read-recently-played", "user-read-private")
     get_spotify_authorization_code(scope = scopes)
     top_artists <- get_my_top_artists_or_tracks(type = "artists", limit = 50)
@@ -228,6 +230,7 @@ shinyServer(function(input, output) {
       labs(x = "Name")
   })
   output$PopularTop <- renderPlot({
+    options(httr_oob_default=TRUE)
     scopes <- c("user-library-read", "streaming", "user-top-read", "user-read-recently-played", "user-read-private")
     get_spotify_authorization_code(scope = scopes)
     top_artists <- get_my_top_artists_or_tracks(type = "artists",limit = 50)
@@ -267,5 +270,9 @@ shinyServer(function(input, output) {
     } else {
       gtpc %>% slice(1:min)
     }
+  })
+  output$tab <- renderUI({
+    url <- a("Click Here to Login and refresh",href="https://accounts.spotify.com/authorize?client_id=9bd7eee5e7c447e0a49422414262372c&scope=ugc-image-upload%20user-modify-playback-state%20user-top-read%20user-library-modify%20user-follow-modify%20playlist-read-private%20playlist-modify-public%20playlist-modify-private%20user-read-playback-state%20user-read-currently-playing%20user-read-private%20user-follow-read%20app-remote-control%20playlist-read-collaborative%20user-read-playback-position%20user-read-email%20user-library-read%20streaming%20user-read-recently-played&redirect_uri=http%3A%2F%2Flocalhost%3A1410%2F&response_type=code&state=sg4plsHntW")
+    tagList(url)
   })
 })

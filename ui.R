@@ -20,6 +20,7 @@ shinyUI(dashboardPage(
   dashboardHeader(title = "Spotify Analysis"),
   dashboardSidebar(
     sidebarMenu(
+      menuItem("Login", tabName = "login", icon = icon("align-justify")),
       menuItem("Album Artist Analysis", tabName = "aaa", icon = icon("acquisitions-incorporated")),
       menuItem("User Analysis", tabName = "ua", icon = icon("calendar")),
       menuItem("Most Popular Spotify Tracks per Category", tabName = "mpstpc", icon = icon("align-justify"))
@@ -29,6 +30,7 @@ shinyUI(dashboardPage(
     tabItems(
       tabItem(tabName = "aaa",
               fluidRow(
+                
                 box(
                   title = "Artist Album Analysis Input",
                   width = "3",
@@ -60,6 +62,7 @@ shinyUI(dashboardPage(
               ),
       tabItem(tabName = "ua",
               fluidRow(
+                
                 box(title = "Your Top 10 Artist!",
                     width = "12",
                     solidHeader = T,
@@ -109,7 +112,12 @@ shinyUI(dashboardPage(
                     solidHeader = T
                     )
                 )
+              ),
+      tabItem(tabName = "login",
+              fluidRow(
+                uiOutput("tab")
               )
+      )
     )
   )
 ))
