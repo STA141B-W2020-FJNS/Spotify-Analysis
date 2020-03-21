@@ -63,6 +63,26 @@ shinyUI(dashboardPage(
               ),
       tabItem(tabName = "ua",
               fluidRow(
+                box(
+                  title = "Your First Song",
+                  solidHeader = TRUE,
+                  status = "primary",
+                  textOutput("first_song")
+                ),
+                
+                box(
+                  title = "The Earliest Song",
+                  solidHeader = TRUE,
+                  status = "primary",
+                  textOutput("earliest_song")
+                ),
+                
+                box(
+                  title = "Popular vs. Niche",
+                  solidHeader = TRUE,
+                  status = "primary",
+                  textOutput("popular_niche")
+                ),
                 
                 box(title = "Your Top 10 Artist!",
                     width = "12",

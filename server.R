@@ -206,6 +206,8 @@ shinyServer(function(input, output) {
     #format the above table into an aesthetic table
     format_album(album_final)
   })
+  
+  
 
   output$Top <- renderPlot({
     
@@ -229,6 +231,52 @@ shinyServer(function(input, output) {
       geom_text(aes(label = followers.total), angle = 45) +
       labs(x = "Name")
   })
+  
+  output$first_song <- renderText({
+    
+    # get user's saved track
+    saved_tracks <- get_my_saved_tracks(limit = 50)
+    
+    # Find user's first saved song and its performer
+    first_song <- saved_tracks$track.name[dim(saved_tracks)[1]]
+    first_song_artist <- saved_tracks$track.artists[[dim(saved_tracks)[1]]]$name
+    
+    # print output
+    paste("The first song you saved in Spotify is", first_song, "performed by", first_song_artist, ".")
+  })
+  
+  
+  output$earliest_song <- renderText({
+    
+    # get user's saved track
+    saved_tracks <- get_my_saved_tracks(limit = 50)
+    # get saved tracks' info
+    tracks_info <- get_tracks(ids = saved_tracks$track.id) 
+    
+    # find the earliest song and its release date
+    earliest_song_date <- min(tracks_info$album.release_date)
+    earliest_song <- tracks_info$name[tracks_info$album.release_date == earliest_song_date]
+    
+    # print output
+    paste("The earliest song you have saved is", earliest_song, ", it was released at", earliest_song_date, ".")
+  })
+  
+  output$popular_niche <- renderText({
+    
+    # get user's saved track
+    saved_tracks <- get_my_saved_tracks(limit = 50)
+    # get saved tracks' info
+    tracks_info <- get_tracks(ids = saved_tracks$track.id)
+    
+    # find popular and niche song
+    popular_song <- tracks_info$name[tracks_info$popularity == max(tracks_info$popularity)]
+    niche_song <- tracks_info$name[tracks_info$popularity == min(tracks_info$popularity)]
+    
+    # print the output
+    paste("The most popular song in your list is", popular_song, ".",
+          "Meanwhile, you also have a niche taste.", niche_song, "in your list doesn't seem to be quite popular.")
+  })
+  
   output$PopularTop <- renderPlot({
     scopes <- c("user-library-read", "streaming", "user-top-read", "user-read-recently-played", "user-read-private")
     get_spotify_authorization_code(scope = scopes)
@@ -257,9 +305,19 @@ shinyServer(function(input, output) {
     ggplot(data = top_track_info, aes(x = energy, y = valence, color = tempo)) +
       geom_point(size = 3) +
       geom_hline(yintercept = 0.5) +
-      geom_vline(xintercept = 0.5) +
-      scale_color_gradient(low = "blue", high = "red")
+      geom_vline(xintercept = 0.5) +      
+      xlim(0,1) +
+      ylim(0,1) +
+      labs(title = 'Emotions of Your Saved Songs', x = 'Valence', y = 'Energy') +
+      annotate("text", x = 0.1, y = 0, label = "Sad/Depressing") +
+      annotate("text", x = 0.1, y = 1, label = "Turbulent/Angry") +
+      annotate("text", x = 0.9, y = 0, label = "Chill/Peaceful") +
+      annotate("text", x = 0.9, y = 1, label = "Happy/Joyful") +
+      scale_color_gradient(low = "blue", high = "red") 
+
+    
   })
+  
   output$mpts <- renderTable({
     gtpc <- get_track_pop_cat(input$cat)
     min <- min(input$num, length(gtpc$name))
