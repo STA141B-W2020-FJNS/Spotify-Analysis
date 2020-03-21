@@ -1,0 +1,13 @@
+name: Spotify-Analysis
+title: Spotify-Analysis
+username:
+account: jzzhu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1973605
+bundleId: 2904600
+url: https://jzzhu.shinyapps.io/Spotify-Analysis/
+when: 1584772421.89695
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Renviron
