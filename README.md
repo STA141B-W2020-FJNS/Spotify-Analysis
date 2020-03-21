@@ -25,7 +25,10 @@ From the 'spotifyr' library, the get_spotify_access_token() was used to create a
 
 **In order to use the Spotify APP, the user must possess a Spotify account to give authentication to the APP.**
 
-**User’s analysis**: Users should be able to access the features of our app after clicking on the tab on the navigation bar on the left. If the app is not working correctly, please close it and re-open should resolve the issues.
+**User’s analysis**: 
+This portion of the app does not function because of the current issues with authentication, this is a running issue that is yet to be resolved, so this portion of the app only runs on your desktop. 
+To access this feature, please refer to the ui.R and server.R files in the repo, then run them on your local machine. 
+After doing this users should be able to access the features of our app after clicking on the tab on the navigation bar on the left. If the app is not working correctly, please close it and re-open should resolve the issues.
 
 **Most Popular Spotify Tracks per Category:** Designed to give a playlist of popular tracks. 
 1) When the user opens the widget, they will see a dropdown menu labeled “Category,” a slider labeled “Number of Tracks,” and a table with columns “name” and “artists.”   
