@@ -1,17 +1,14 @@
 Spotify-Analysis
 =============
 ### STA 141B
-### Author: Franklin Shih(912667159) Junzhe Zhu
+### Authors: Franklin Shih, Junzhe Zhu Nilay Varshney, Sukhween Bhullar
 ------------------------------------------------
 
 ### Introduction:  
 Our app is built for utilizing the Spotify API and performs summary, analysis and data visualization of popular artists and tracks. We built this shiny app under the idea that we want to explore the Spotify database to find interest and top tracks of different genres, analyze albums by your favorite artists, assess the mood of the song, and user’s idea for personal data visualization.  
 
 ### Data Description:  
-The source of data comes from Spotify API. With the help of Spotifyr package on RStudio (https://cloud.r-project.org/web/packages/spotifyr/spotifyr.pdf ), we are able to retrieve desired data from Spotify and perform our analysis and data visualization on  audio features of tracks to learn about ist danceability energy, valence and more. We can even read more in-depth analysis data about tracks such as segments, beats, and tatums.   
-
-### Data Description:  
-The source of data comes from Spotify API. With the help of Spotifyr package on RStudio (https://cloud.r-project.org/web/packages/spotifyr/spotifyr.pdf ), we are able to retrieve desired data from Spotify and perform our analysis and data visualization on  audio features of tracks to learn about ist danceability energy, valence and more. We can even read more in-depth analysis data about tracks such as segments, beats, and tatums.   
+The source of data comes from Spotify API. With the help of Spotifyr package on RStudio (https://cloud.r-project.org/web/packages/spotifyr/spotifyr.pdf ), we are able to retrieve desired data from Spotify and perform our analysis and data visualization on  audio features of tracks to learn about ist danceability energy, valence and more. We can even read more in-depth analysis data about tracks such as segments, beats, and tatums.
 
 ### Data Retrieval and Process:  
 
