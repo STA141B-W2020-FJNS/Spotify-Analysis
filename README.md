@@ -1,7 +1,7 @@
 Spotify-Analysis
 =============
 ### STA 141B
-### Author: Franklin Shih(912667159)  Junzhe Zhu(914155753)
+### Author: Franklin Shih(912667159) Junzhe Zhu
 ------------------------------------------------
 
 ### Introduction:  
