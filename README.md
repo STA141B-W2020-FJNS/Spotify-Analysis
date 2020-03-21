@@ -1,7 +1,7 @@
 Spotify-Analysis
 =============
 ### STA 141B
-### Authors: Franklin Shih, Junzhe Zhu Nilay Varshney, Sukhween Bhullar
+### Authors: Franklin Shih, Junzhe Zhu, Nilay Varshney, Sukhween Bhullar
 ------------------------------------------------
 
 ### Introduction:  
