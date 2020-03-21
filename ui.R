@@ -36,7 +36,8 @@ shinyUI(dashboardPage(
                   width = "3",
                   height = "360",
                   textInput(inputId = "artist",
-                            label = "Please type an artist name:"),
+                            label = "Please type an artist name:",
+                            value="bts"), #changed the default artist name value as bts 
                   #get sorting method of preference from the user
                   selectInput(inputId = "sort",
                               label = "Sort table by:",
