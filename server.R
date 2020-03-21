@@ -230,7 +230,6 @@ shinyServer(function(input, output) {
       labs(x = "Name")
   })
   output$PopularTop <- renderPlot({
-    options(httr_oob_default=TRUE)
     scopes <- c("user-library-read", "streaming", "user-top-read", "user-read-recently-played", "user-read-private")
     get_spotify_authorization_code(scope = scopes)
     top_artists <- get_my_top_artists_or_tracks(type = "artists",limit = 50)
