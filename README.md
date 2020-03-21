@@ -26,7 +26,7 @@ From the 'spotifyr' library, the get_spotify_access_token() was used to create a
 **In order to use the Spotify APP, the user must possess a Spotify account to give authentication to the APP.**
 
 **User’s analysis**: 
-This portion of the app does not function because of the current issues with authentication, this is a running issue that is yet to be resolved, so this portion of the app only runs on your desktop. 
+This portion of the app does not function because of the current issues with authentication, this is a running issue that is yet to be resolved, so this portion of the app only runs on your desktop. Note: If you are running this app on your desktop you may need to run the following: devtools::install_github('charlie86/spotifyr') 
 To access this feature, please refer to the ui.R and server.R files in the repo, then run them on your local machine. 
 After doing this users should be able to access the features of our app after clicking on the tab on the navigation bar on the left. If the app is not working correctly, please close it and re-open should resolve the issues.
 
